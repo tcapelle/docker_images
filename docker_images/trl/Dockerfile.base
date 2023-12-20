@@ -1,0 +1,21 @@
+# https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch/tags
+# 12/01/2023 -> https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-23-11.html
+FROM nvcr.io/nvidia/pytorch:23.11-py3
+
+## Flash Atten 2
+RUN python -m pip install flash-attn --no-build-isolation
+
+## Bitsandbytes
+
+WORKDIR /workspace
+RUN git clone https://github.com/timdettmers/bitsandbytes.git
+
+# CUDA_VERSIONS in {110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 120}
+# make argument in {cuda110, cuda11x, cuda12x}
+# if you do not know what CUDA you have, try looking at the output of: python -m bitsandbytes
+WORKDIR /workspace/bitsandbytes
+
+RUN CUDA_VERSION=123 make cuda12x && \
+    python setup.py install
+
+WORKDIR /workspace
