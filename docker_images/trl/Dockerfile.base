@@ -3,7 +3,7 @@
 FROM nvcr.io/nvidia/pytorch:23.11-py3
 
 ## Flash Atten 2
-RUN python -m pip install flash-attn --no-build-isolation
+RUN python -m pip install "flash-attn==2.3.6" --no-build-isolation
 
 ## Bitsandbytes
 
