@@ -1,4 +1,4 @@
-FROM ghcr.io/tcapelle/pt21_base:v0
+FROM ghcr.io/tcapelle/pt22_base:v0
 
 WORKDIR /workspace
 
